@@ -2,16 +2,7 @@ version: "3.1"
 
 stories:
 
-- story: Tư vấn tuyển sinh cơ bản
-  steps:
-  - intent: chao_hoi
-  - action: utter_chao_hoi
-  - intent: hoi_thong_tin_nganh
-  - action: action_hoi_thong_tin_nganh
-  - intent: tra_cuu_diem_chuan
-  - action: action_tra_cuu_diem_chuan
-  - intent: cam_on
-  - action: utter_cam_on
+
 
 - story: Hỏi học phí và học bổng
   steps:
@@ -81,3 +72,55 @@ stories:
   - action: utter_phong_lab_dieu_kien_su_dung
   - intent: phong_lab_lien_he
   - action: utter_phong_lab_lien_he
+
+- story: hoi_diem_nganh_thieu_nam
+  steps:
+  - intent: tra_cuu_diem_chuan_theo_nganh
+    entities:
+    - ten_nganh
+  - action: action_tra_cuu_diem_chuan_theo_nganh
+  - intent: tra_cuu_diem_chuan_theo_nam
+    entities:
+    - nam
+  - action: action_tra_cuu_diem_chuan_theo_nganh
+
+- story: hoi_diem_nam_thieu_nganh
+  steps:
+  - intent: tra_cuu_diem_chuan_theo_nam
+    entities:
+    - nam
+  - action: action_tra_cuu_diem_chuan_theo_nam
+  - intent: tra_cuu_diem_chuan_theo_nganh
+    entities:
+    - ten_nganh
+  - action: action_tra_cuu_diem_chuan_theo_nam
+
+- story: hoi_phuong_thuc_thieu_nam
+  steps:
+  - intent: tra_cuu_diem_chuan_theo_phuong_thuc
+    entities:
+    - loai_xet_tuyen
+    - ten_nganh
+  - action: action_tra_cuu_diem_chuan_theo_phuong_thuc
+  - intent: tra_cuu_diem_chuan_theo_nam
+    entities:
+    - nam
+  - action: action_tra_cuu_diem_chuan_theo_phuong_thuc
+
+- story: hoi_bang_diem_thieu_nam
+  steps:
+  - intent: tra_cuu_diem_chuan_tong_quan
+  - action: action_tra_cuu_diem_chuan_tong_quan
+  - intent: tra_cuu_diem_chuan_theo_nam
+    entities:
+    - nam
+  - action: action_tra_cuu_diem_chuan_tong_quan
+
+  # Story 5: Hỏi đầy đủ thông tin ngay từ đầu
+- story: hoi_day_du_thong_tin
+  steps:
+  - intent: tra_cuu_diem_chuan_theo_nam
+    entities:
+    - ten_nganh
+    - nam
+  - action: action_tra_cuu_diem_chuan_theo_nam
