@@ -116,7 +116,7 @@ stories:
     - nam
   - action: action_tra_cuu_diem_chuan_tong_quan
 
-  # Story 5: Hỏi đầy đủ thông tin ngay từ đầu
+  
 - story: hoi_day_du_thong_tin
   steps:
   - intent: tra_cuu_diem_chuan_theo_nam
