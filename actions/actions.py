@@ -1,17 +1,251 @@
-
+import google.generativeai as genai
+import os
+import time
+import requests
 import unicodedata
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet
+from rasa_sdk.events import SlotSet, FollowupAction
 
 import sqlite3
 import hashlib
-import unicodedata
-from typing import Any, Text, Dict, List
-from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet
+
+class ActionDefaultFallback(Action):
+    def name(self) -> Text:
+        return "action_default_fallback"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+
+        user_message = tracker.latest_message.get('text', '')
+        confidence = tracker.latest_message.get('intent', {}).get('confidence', 0)
+
+        print(f"🔍 Fallback triggered - Confidence: {confidence:.3f}")
+        print(f"🤖 User question: {user_message}")
+
+        
+        fallback_count = tracker.get_slot("fallback_count") or 0
+        fallback_count += 1
+
+        print(f"🔢 Fallback count: {fallback_count}")
+
+        if fallback_count >= 3:  # 🔒 CHẶN SAU 3 LẦN FALLBACK
+            print("🚫 Blocking infinite loop - sending contact info")
+            contact_msg = (
+                "Hiện tại hệ thống đang gặp sự cố kỹ thuật. "
+                "Vui lòng liên hệ trực tiếp:\n"
+                "📞 Hotline: 024.335.25832\n"
+                "📧 Email: khoadientu@ptit.edu.vn"
+            )
+            dispatcher.utter_message(text=contact_msg)
+            return [SlotSet("fallback_count", 0)]  # Reset counter
+
+        
+        dispatcher.utter_message(text="Để tôi hỗ trợ bạn tốt hơn với câu hỏi này...")
+
+        return [
+            SlotSet("fallback_count", fallback_count),
+            FollowupAction("action_fallback_gemini")
+        ]
+
+
+class ActionFallbackGemini(Action):
+    def name(self) -> Text:
+        return "action_fallback_gemini"
+
+    def __init__(self):
+        self.api_key = "AIzaSyDPhLWyxOi8VsgjlQyc0y23LSlpMyLoO2w"
+        self.api_available = True
+
+        
+        self.models_priority = [
+            'gemini-2.5-flash',
+            'gemini-2.0-flash',
+            'gemini-2.5-pro',
+        ]
+        self.current_model_index = 0
+        self.max_model_retries = 2  # 🔒 Giới hạn retry model
+
+        try:
+            genai.configure(api_key=self.api_key)
+            print("✅ Gemini configured successfully")
+        except Exception as e:
+            print(f"❌ Gemini config error: {e}")
+            self.api_available = False
+
+    def _call_gemini(self, prompt: str) -> str:
+        
+        if not self.api_available:
+            return None
+
+        original_model_index = self.current_model_index
+        retry_count = 0
+
+        while retry_count < self.max_model_retries * len(self.models_priority):
+            model_name = self.models_priority[self.current_model_index]
+
+            try:
+                print(f"🔄 Trying model: {model_name} (attempt {retry_count + 1})")
+                model = genai.GenerativeModel(model_name)
+                response = model.generate_content(
+                    prompt,
+                    generation_config=genai.types.GenerationConfig(
+                        max_output_tokens=220,
+                        temperature=0.3,
+                    ),
+                    request_options={'timeout': 8}
+                )
+
+                if response and response.text:
+                    response_text = response.text.strip()
+                    if self._validate_response(response_text):
+                        print(f"✅ Success with model: {model_name}")
+                        return response_text
+                    else:
+                        print(f"❌ Invalid response from {model_name}")
+
+            except Exception as e:
+                print(f"❌ Model {model_name} failed: {e}")
+
+            
+            self.current_model_index = (self.current_model_index + 1) % len(self.models_priority)
+            retry_count += 1
+
+            
+            if self.current_model_index == original_model_index and retry_count > 0:
+                print("🚫 All models exhausted")
+                break
+
+        
+        self.current_model_index = 0
+        return None
+
+    def _validate_response(self, response_text: str) -> bool:
+        
+        if not response_text:
+            return False
+
+        invalid_patterns = [
+            "câu hỏi nằm ngoài phạm vi tư vấn",
+            "không thể trả lời",
+            "i cannot",
+            "i'm sorry",
+            "xin lỗi tôi không thể trả lời",
+            "nằm ngoài phạm vi hiểu biết"
+        ]
+
+        response_lower = response_text.lower()
+        for pattern in invalid_patterns:
+            if pattern in response_lower:
+                print(f"🚫 Response contains invalid pattern: {pattern}")
+                return False
+
+        words = response_text.split()
+        is_valid = 5 <= len(words) <= 120
+        print(f"📊 Word count: {len(words)} -> {'Valid' if is_valid else 'Invalid'}")
+
+        return is_valid
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        user_message = tracker.latest_message.get('text', '')
+
+        
+        system_prompt = """
+Bạn là CHATBOT TƯ VẤN TUYỂN SINH CHÍNH THỨC của **Khoa Điện Tử – Học viện Công nghệ Bưu chính Viễn thông (PTIT)**.
+
+🎯 **Mục tiêu:**
+- Giải đáp thắc mắc về tuyển sinh Khoa Điện tử PTIT một cách ngắn gọn, dễ hiểu, có định hướng cho thí sinh.
+- Giữ giọng văn thân thiện, rõ ràng, ưu tiên liệt kê bullet để dễ đọc.
+- Giải đáp chính xác các câu hỏi liên quan tới PTIT 
+
+🏫 **Thông tin cố định (KHÔNG ĐƯỢC THAY ĐỔI):**
+- Địa chỉ: 96A Trần Phú, Hà Đông, Hà Nội
+- Điện thoại: 024.335.25832
+- Email: khoadientu@ptit.edu.vn
+
+🎓 **Các ngành đào tạo:**
+1. Kỹ thuật Điều khiển và Tự động hóa
+2. Công nghệ Vi mạch Bán dẫn
+3. Công nghệ Kỹ thuật Điện, Điện tử
+
+📌 **Thông tin tuyển sinh tham khảo 2024:**
+- Điểm chuẩn: 24 – 26 điểm (tùy ngành)
+- Tổ hợp: A00 (Toán – Lý – Hóa), A01 (Toán – Lý – Anh)
+- Chỉ tiêu: ~200 sinh viên
+- Học phí: 15 – 20 triệu / học kỳ
+- Thời gian đào tạo: 4.5 năm
+
+🗂 **Hồ sơ đăng ký cơ bản gồm:**
+- Phiếu đăng ký xét tuyển
+- Học bạ + Bằng tốt nghiệp THPT (bản sao)
+- Giấy khai sinh, CMND/CCCD (bản sao)
+- Ảnh 3x4 (4 tấm)
+
+🚫 **Giới hạn bắt BUỘC:**
+- Chỉ trả lời về TUYỂN SINH TRƯỜNG HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG PTIT – KHÔNG tư vấn trường khác.
+- Nếu câu hỏi ngoài phạm vi → trả lời: "Câu hỏi nằm ngoài phạm vi tư vấn. Vui lòng liên hệ trực tiếp Khoa Điện Tử PTIT để được hỗ trợ."
+- Nếu dữ liệu CHƯA CÔNG BỐ → trả lời rõ: "Hiện chưa có dữ liệu chính thức, bạn có thể theo dõi website hoặc hotline của khoa để cập nhật."
+
+💬 **Quy tắc trả lời:**
+- Dưới 80 từ.
+- Ngắn gọn, chia gạch đầu dòng nếu phù hợp.
+- Có thể dùng icon như ✅ 📌 📞 để tăng thân thiện.
+- Không nói kiểu AI/robot, mà như người tư vấn tuyển sinh nhiệt tình.
+- Nếu câu hỏi không liên quan đến tuyển sinh, có thể trả lời ngắn gọn và hướng dẫn liên hệ bộ phận chuyên môn
+Hãy trả lời câu hỏi sau theo đúng quy tắc trên:
+"""
+
+        full_prompt = f"{system_prompt}\n{user_message}"
+
+        try:
+            bot_response = self._call_gemini(full_prompt)
+
+            if bot_response:
+                print(f"✅ Gemini response successful")
+                dispatcher.utter_message(text=bot_response)
+                # 🔒 RESET FALLBACK COUNTER khi thành công
+                return [
+                    SlotSet("fallback_count", 0),
+                    SlotSet("ten_nganh", None),
+                    SlotSet("nam", None),
+                    SlotSet("awaiting_year", False),
+                    SlotSet("awaiting_major", False),
+                    SlotSet("awaiting_year_phuong_thuc", False)
+                ]
+            else:
+                print("❌ All Gemini models failed")
+                self._send_fallback_response(dispatcher)
+
+        except Exception as e:
+            print(f"💥 Critical Gemini error: {e}")
+            self._send_fallback_response(dispatcher)
+
+        return []
+
+    def _send_fallback_response(self, dispatcher: CollectingDispatcher):
+       
+        fallback_responses = [
+            "Hiện tôi chưa thể trả lời câu hỏi này. Bạn vui lòng liên hệ trực tiếp Khoa Điện Tử PTIT để được hỗ trợ chi tiết nhé! 📞",
+            "Câu hỏi này cần được tư vấn chi tiết hơn. Bạn có thể liên hệ hotline 024.335.25832 để được giải đáp cụ thể! ✅",
+            "Để đảm bảo thông tin chính xác, mời bạn liên hệ trực tiếp Khoa Điện Tử PTIT qua số 024.335.25832 📞"
+        ]
+
+        import random
+        response = random.choice(fallback_responses)
+        dispatcher.utter_message(text=response)
+
+
+class ActionResetFallbackCount(Action):
+   
+
+    def name(self) -> Text:
+        return "action_reset_fallback_count"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print("🔄 Resetting fallback counter")
+        return [SlotSet("fallback_count", 0)]
+
 # //key noi voi database
 def get_db_connection():
     conn = sqlite3.connect("user_data.db")
