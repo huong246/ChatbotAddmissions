@@ -99,6 +99,7 @@ nlu:
     - Bot này giúp mình được những gì?
 
 
+
 - intent: lien_he_khoa_phong_giao_vu
   examples: |
     - Tôi muốn liên hệ với khoa Điện tử
@@ -203,65 +204,6 @@ nlu:
     - [Công nghệ thông tin](ten_nganh) có mã ngành mấy vậy ạ?
     - Cho biết mã ngành của [Công nghệ kỹ thuật điện, điện tử](ten_nganh) bên PTIT
     - Mã ngành của [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
-
-
-- intent: tra_cuu_diem_chuan
-  examples: |
-    - Điểm chuẩn THPT ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh) là bao nhiêu?
-    - Cho tôi hỏi điểm THPT ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh)
-    - Ngành [Công nghệ vi mạch bán dẫn](ten_nganh) lấy bao nhiêu điểm THPT?
-    - Điểm ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)?
-    - [Kỹ thuật điều khiển và tự động hóa](ten_nganh) điểm chuẩn bao nhiêu?
-    - Điểm xét tuyển tài năng ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh)
-    - Điểm theo chứng chỉ SAT của ngành [Công nghệ vi mạch bán dẫn](ten_nganh)
-    - Điểm ACT ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
-    - Điểm HSA của ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh)
-    - Điểm TSA ngành [Công nghệ vi mạch bán dẫn](ten_nganh)
-    - Điểm APT ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
-    - Điểm theo phương thức xét tuyển kết hợp ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh)
-    - Ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh) năm nay lấy mấy điểm?
-    - Cho tôi xem điểm chuẩn của ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh)
-    - Năm nay ngành [Công nghệ vi mạch bán dẫn](ten_nganh) lấy bao nhiêu điểm?
-    - Điểm xét tuyển [SAT](loai_xet_tuyen) ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh)
-    - Điểm chuẩn [THPT](loai_xet_tuyen) ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
-    - Điểm xét tuyển [tài năng](loai_xet_tuyen) của ngành [Công nghệ vi mạch bán dẫn](ten_nganh)
-    - Cho tôi biết điểm [kết hợp](loai_xet_tuyen) của ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
-    - Ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh) có điểm chuẩn bao nhiêu vậy?
-    - Điểm chuẩn năm nay của [Công nghệ kỹ thuật điện, điện tử](ten_nganh)
-    - Năm ngoái ngành [Điều khiển và tự động hóa](ten_nganh) lấy bao nhiêu điểm?
-    - Cho em xin điểm chuẩn ngành [Công nghệ vi mạch bán dẫn](ten_nganh) năm nay
-    - Mức điểm trúng tuyển vào ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh) là bao nhiêu?
-    - Ngành [Công nghệ kỹ thuật điện, điện tử](ten_nganh) năm nay điểm cao không?
-    - Em muốn biết điểm chuẩn ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
-
-
-- intent: tra_cuu_kha_nang_trung_tuyen
-  examples: |
-    - Em được [26](diem) điểm có đỗ ngành [Điều khiển và Tự động hóa](ten_nganh) không?
-    - Với [25.5](diem) điểm thì có khả năng vào ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) không?
-    - Được [27](diem) điểm có đỗ ngành [Vi mạch bán dẫn](ten_nganh) không?
-    - Điểm em [25](diem) thì có trúng tuyển ngành [Điều khiển và Tự động hóa](ten_nganh) không?
-    - Nếu em thi được [24](diem) điểm thì có khả năng đỗ ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) không?
-    - Với [26](diem) điểm liệu em có vào được ngành [Vi mạch bán dẫn](ten_nganh) không?
-    - Em được [26](diem) điểm thì có ngành nào trúng tuyển không?
-    - [25](diem) điểm thì nên chọn ngành nào để có khả năng đỗ cao?
-    - Với [27](diem) điểm thì có ngành nào đủ điểm chuẩn không?
-    - Em đạt [28](diem) điểm, có cơ hội vào [Điều khiển và Tự động hóa](ten_nganh) không?
-    - Với [25](diem) điểm em có khả năng trúng tuyển không?
-    - Điểm của em là [26](diem), liệu có vào được khoa Điện tử không?
-    - Em được [24.5](diem) điểm có hi vọng đỗ không?
-    - Có thể vào ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) với [26](diem) điểm không?
-    - Với [25](diem) điểm em có cơ hội vào ngành [Vi mạch bán dẫn](ten_nganh) không?
-    - Em thi được [27](diem) điểm thì có đỗ ngành này không?
-    - Nếu được [24](diem) điểm thì có nên nộp vào ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) không?
-    - Với [25.5](diem) điểm thì có khả năng trúng tuyển cao không?
-    - Em muốn biết [26](diem) điểm có khả năng vào khoa Điện tử không?
-    - Với số điểm [27](diem), em có thể đỗ ngành [Điều khiển và Tự động hóa](ten_nganh) không?
-    - Nếu được [25](diem) điểm thì tỉ lệ đỗ ngành [Vi mạch bán dẫn](ten_nganh) là bao nhiêu?
-    - [26](diem) điểm có cao hơn điểm chuẩn ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) không?
-    - Với [27](diem) điểm thì có khả năng đỗ ngành [Điều khiển và Tự động hóa](ten_nganh) không?
-    - Em thi được [24](diem) điểm thì có nên đăng ký ngành [Vi mạch bán dẫn](ten_nganh) không?
-    - Nếu em đạt [26](diem) điểm thì có đỗ được ngành này không?
 
 
 - intent: xet_tuyen_dieu_kien_dien_tu
@@ -1260,10 +1202,163 @@ nlu:
     - Giới thiệu học viện công nghệ bưu chính viễn thông
     
     
-
+- intent: nlu_fallback
+  examples: |
+    - asdfasdf
+    - 12345
+    - ????
+    - ....
+    - abcxyz
+    - jfkdls
+    - cmnxbc
+    - !@#$%
+    - 789456
+    - zxcvbnm
     
     
   
+# Intent 1: Tra cứu điểm chuẩn theo ngành (không năm, không phương thức)
+- intent: tra_cuu_diem_chuan_theo_nganh
+  examples: |
+    - điểm chuẩn ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
+    - [Công nghệ vi mạch bán dẫn](ten_nganh) bao nhiêu điểm?
+    - [Điện điện tử](ten_nganh) lấy mấy điểm?
+    - cho em hỏi điểm [tự động hóa](ten_nganh)
+    - [vi mạch](ten_nganh) có điểm chuẩn bao nhiêu?
+    - ngành [điều khiển tự động](ten_nganh) mấy điểm?
+    - điểm đầu vào [công nghệ kỹ thuật điện điện tử](ten_nganh)
+    - [bán dẫn](ten_nganh) cần bao nhiêu điểm?
+    - điểm chuẩn [kỹ thuật điều khiển](ten_nganh) là gì?
+    - [công nghệ vi mạch](ten_nganh) bao nhiêu điểm?
+    - em muốn biết điểm [điện tử](ten_nganh)
+    - điểm trúng tuyển [tự động hóa](ten_nganh)
+    - [điều khiển và tự động hóa](ten_nganh) lấy bao nhiêu?
+    - điểm chuẩn hiện tại của [vi mạch bán dẫn](ten_nganh)
+    - [công nghệ điện điện tử](ten_nganh) điểm bao nhiêu?
+    - cho xin điểm [kỹ thuật điều khiển](ten_nganh)
+    - [tự động](ten_nganh) mấy điểm?
+    - điểm [điện tử viễn thông](ten_nganh)
+    - [công nghệ bán dẫn](ten_nganh) bao nhiêu?
+    - ngành [điều khiển](ten_nganh) có điểm chuẩn thế nào?
+    - điểm chuẩn mới nhất [công nghệ vi mạch](ten_nganh)
+    - [kỹ thuật tự động hóa](ten_nganh) lấy mấy điểm?
+    - cho em hỏi điểm [điện điện tử](ten_nganh) với
+    - [vi mạch](ten_nganh) năm nay bao nhiêu điểm?
+    - điểm chuẩn ngành [điều khiển tự động hóa](ten_nganh)
+
+  # Intent 2: Tra cứu điểm chuẩn theo năm (đã có)
+- intent: tra_cuu_diem_chuan_theo_nam
+  examples: |
+    - điểm chuẩn [2023](nam) ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
+    - [2024](nam) [công nghệ vi mạch bán dẫn](ten_nganh) bao nhiêu điểm?
+    - ngành [điện điện tử](ten_nganh) năm [2025](nam) lấy mấy điểm?
+    - điểm chuẩn [2022](nam) [khoa điện tử](ten_khoa)
+    - [khoa đt](ten_khoa) [2023](nam) bao nhiêu điểm?
+    - điểm [2024](nam) ngành [tự động hóa](ten_nganh)
+    - [2025](nam) [khoa ktđt](ten_khoa) điểm chuẩn
+    - năm [2023](nam) [vi mạch bán dẫn](ten_nganh) bao nhiêu điểm?
+    - điểm chuẩn [2024](nam) [khoa điện tử](ten_khoa)
+    - [2022](nam) [điều khiển tự động](ten_nganh) mấy điểm?
+    - năm ngoái [công nghệ vi mạch](ten_nganh) bao nhiêu điểm?
+    - điểm chuẩn [2025](nam) [khoa đt](ten_khoa)
+    - [2023](nam) ngành [điện tử](ten_nganh) lấy bao nhiêu?
+    - điểm [2024](nam) [khoa ktđt 1](ten_khoa)
+    - năm [2025](nam) [tự động hóa](ten_nganh) cần mấy điểm?
+    - điểm chuẩn [2022](nam) [vi mạch](ten_nganh)
+    - [2023](nam) [khoa dt](ten_khoa) bao nhiêu điểm?
+    - năm nay [điều khiển](ten_nganh) bao nhiêu điểm?
+    - điểm [2024](nam) [khoa điện tử viễn thông](ten_khoa)
+    - [2025](nam) [công nghệ điện điện tử](ten_nganh) mấy điểm?
+    - điểm chuẩn năm [2023](nam) [bán dẫn](ten_nganh)
+    - [2024](nam) [khoa kỹ thuật điện tử 1](ten_khoa) bao nhiêu?
+    - năm [2025](nam) [kỹ thuật điều khiển](ten_nganh) điểm chuẩn
+    - điểm [2022](nam) [khoa đt](ten_khoa)
+    - [2023](nam) [công nghệ vi mạch bán dẫn](ten_nganh) lấy mấy điểm?
+- intent: tra_cuu_diem_chuan_theo_phuong_thuc
+  examples: |
+    - điểm [SAT](loai_xet_tuyen) ngành [Kỹ thuật điều khiển và tự động hóa](ten_nganh)
+    - [THPT](loai_xet_tuyen) [công nghệ vi mạch bán dẫn](ten_nganh) bao nhiêu điểm?
+    - điểm [HSA](loai_xet_tuyen) của ngành [điện điện tử](ten_nganh)
+    - [ACT](loai_xet_tuyen) [tự động hóa](ten_nganh) cần bao nhiêu?
+    - điểm [tài năng](loai_xet_tuyen) ngành [vi mạch](ten_nganh)
+    - [xét tuyển kết hợp](loai_xet_tuyen) [điều khiển tự động](ten_nganh)
+    - thi [SAT](loai_xet_tuyen) vào [điện tử](ten_nganh) được bao nhiêu điểm?
+    - [THPT](loai_xet_tuyen) năm [2024](nam) [tự động hóa](ten_nganh) mấy điểm?
+    - em định xét [học bạ](loai_xet_tuyen) ngành [vi mạch](ten_nganh) thì cần bao nhiêu?
+    - điểm [thi đánh giá năng lực](loai_xet_tuyen) [2023](nam) [điện điện tử](ten_nganh)
+    - xét [tài năng](loai_xet_tuyen) năm nay [khoa điện tử](ten_khoa) bao nhiêu điểm?
+    - [SAT](loai_xet_tuyen) [2024](nam) [khoa đt](ten_khoa) lấy mấy điểm?
+    - điểm chuẩn [ACT](loai_xet_tuyen) ngành [điều khiển](ten_nganh) [2025](nam)
+    - [HSA](loai_xet_tuyen) năm ngoái [công nghệ vi mạch](ten_nganh) bao nhiêu?
+    - xét [học bạ](loai_xet_tuyen) vào [khoa ktđt](ten_khoa) cần mấy điểm?
+    - [thi đánh giá năng lực](loai_xet_tuyen) [2024](nam) [tự động hóa](ten_nganh)
+    - điểm [xét tuyển kết hợp](loai_xet_tuyen) [khoa điện tử](ten_khoa) năm [2023](nam)
+    - [APT](loai_xet_tuyen) [2025](nam) [điện tử](ten_nganh) bao nhiêu điểm?
+    - [TSA](loai_xet_tuyen) ngành [điều khiển tự động](ten_nganh) cần bao nhiêu?
+    - điểm [học bạ](loai_xet_tuyen) [2024](nam) [công nghệ vi mạch](ten_nganh)
+    - xét [tài năng](loai_xet_tuyen) [khoa đt](ten_khoa) năm [2023](nam) mấy điểm?
+    - [SAT](loai_xet_tuyen) cho ngành [bán dẫn](ten_nganh) bao nhiêu?
+    - điểm [ACT](loai_xet_tuyen) [2025](nam) [khoa ktđt 1](ten_khoa)
+    - [THPT](loai_xet_tuyen) [khoa điện tử](ten_khoa) [2024](nam) lấy bao nhiêu?
+    - xét [học bạ](loai_xet_tuyen) ngành [tự động hóa](ten_nganh) cần mấy điểm?
+
+# Intent 4: Tra cứu điểm chuẩn tổng quan (xem bảng điểm)
+- intent: tra_cuu_diem_chuan_tong_quan
+  examples: |
+    - cho xem bảng điểm chuẩn khoa điện tử
+    - hiển thị tất cả điểm chuẩn [khoa đt](ten_khoa)
+    - điểm chuẩn các ngành khoa điện tử
+    - toàn bộ điểm chuẩn [2024](nam)
+    - bảng điểm chuẩn năm [2023](nam)
+    - danh sách điểm chuẩn các ngành [khoa đt](ten_khoa)
+    - hiển thị điểm chuẩn tất cả ngành
+    - xem điểm chuẩn tổng quan
+    - điểm chuẩn đầy đủ các ngành
+    - cho tôi xem toàn bộ điểm chuẩn [2025](nam)
+    - bảng điểm [khoa điện tử](ten_khoa)
+    - điểm chuẩn tất cả ngành [khoa đt](ten_khoa) [2024](nam)
+    - hiển thị bảng điểm chuẩn năm [2023](nam)
+    - toàn bộ điểm các ngành [khoa ktđt](ten_khoa)
+    - danh sách điểm chuẩn [khoa điện tử](ten_khoa) [2025](nam)
+    - xem tất cả điểm chuẩn hiện tại
+    - bảng điểm chuẩn đầy đủ
+    - cho em xem điểm chuẩn tất cả các ngành
+    - hiển thị toàn bộ điểm [2024](nam)
+    - điểm chuẩn tổng hợp các ngành
+    - xem bảng điểm [khoa đt](ten_khoa) năm [2023](nam)
+    - tất cả điểm chuẩn khoa điện tử
+    - danh sách đầy đủ điểm chuẩn [2025](nam)
+    - bảng tổng hợp điểm chuẩn
+    - cho xem điểm chuẩn tất cả ngành trong [khoa ktđt 1](ten_khoa)
+
+- intent: tra_cuu_kha_nang_trung_tuyen
+  examples: |
+    - Em được [26](diem) điểm có đỗ ngành [Điều khiển và Tự động hóa](ten_nganh) không?
+    - Với [25.5](diem) điểm thì có khả năng vào ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) không?
+    - Được [27](diem) điểm có đỗ ngành [Vi mạch bán dẫn](ten_nganh) không?
+    - Điểm em [25](diem) thì có trúng tuyển ngành [Điều khiển và Tự động hóa](ten_nganh) không?
+    - Nếu em thi được [24](diem) điểm thì có khả năng đỗ ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) không?
+    - Với [26](diem) điểm liệu em có vào được ngành [Vi mạch bán dẫn](ten_nganh) không?
+    - Em được [26](diem) điểm thì có ngành nào trúng tuyển không?
+    - [25](diem) điểm thì nên chọn ngành nào để có khả năng đỗ cao?
+    - Với [27](diem) điểm thì có ngành nào đủ điểm chuẩn không?
+    - Em đạt [28](diem) điểm, có cơ hội vào [Điều khiển và Tự động hóa](ten_nganh) không?
+    - Với [25](diem) điểm em có khả năng trúng tuyển không?
+    - Điểm của em là [26](diem), liệu có vào được khoa Điện tử không?
+    - Em được [24.5](diem) điểm có hi vọng đỗ không?
+    - Có thể vào ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) với [26](diem) điểm không?
+    - Với [25](diem) điểm em có cơ hội vào ngành [Vi mạch bán dẫn](ten_nganh) không?
+    - Em thi được [27](diem) điểm thì có đỗ ngành này không?
+    - Nếu được [24](diem) điểm thì có nên nộp vào ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) không?
+    - Với [25.5](diem) điểm thì có khả năng trúng tuyển cao không?
+    - Em muốn biết [26](diem) điểm có khả năng vào khoa Điện tử không?
+    - Với số điểm [27](diem), em có thể đỗ ngành [Điều khiển và Tự động hóa](ten_nganh) không?
+    - Nếu được [25](diem) điểm thì tỉ lệ đỗ ngành [Vi mạch bán dẫn](ten_nganh) là bao nhiêu?
+    - [26](diem) điểm có cao hơn điểm chuẩn ngành [Công nghệ Kỹ thuật Điện, điện tử](ten_nganh) không?
+    - Với [27](diem) điểm thì có khả năng đỗ ngành [Điều khiển và Tự động hóa](ten_nganh) không?
+    - Em thi được [24](diem) điểm thì có nên đăng ký ngành [Vi mạch bán dẫn](ten_nganh) không?
+    - Nếu em đạt [26](diem) điểm thì có đỗ được ngành này không?
+
 
 
 - synonym: Kỹ thuật Điều khiển và Tự động hóa
@@ -1380,12 +1475,23 @@ nlu:
 
 - lookup: ten_nganh
   examples: |
-    - Kỹ thuật Điều khiển và Tự động hóa
-    - Công nghệ Kỹ thuật Điện tử
-    - Công nghệ Vi mạch bán dẫn
-    - Tự động hóa
-    - Vi mạch
-    - Kỹ thuật Điều khiển và Tự động hóa
+    - Kỹ thuật điều khiển và tự động hóa
+    - Công nghệ kỹ thuật điện, điện tử
+    - Công nghệ vi mạch bán dẫn
+    - điều khiển tự động
+    - điện điện tử
+    - vi mạch bán dẫn
+    - tự động hóa
+    - kỹ thuật điều khiển
+    - công nghệ vi mạch
+    - bán dẫn
+    - điện tử
+    - điều khiển
+    - công nghệ điện điện tử
+    - kỹ thuật tự động hóa
+    - điện tử viễn thông
+    - công nghệ bán dẫn
+    - vi mạch
 
 - lookup: co_so
   examples: |
@@ -1400,19 +1506,24 @@ nlu:
     - miền Bắc
     - miền Nam
 
-- lookup: phuong_thuc
+- lookup: loai_xet_tuyen
   examples: |
-    - thi TN THPT
-    - thi tốt nghiệp
-    - điểm thi tốt nghiệp
-    - xét học bạ
-    - học bạ
+    - THPT
     - SAT
     - ACT
     - HSA
     - TSA
-    - SPT
     - APT
-    - tuyển thẳng
-    - ưu tiên xét tuyển
+    - tài năng
+    - xét tuyển kết hợp
+    - học bạ
+    - thi đánh giá năng lực
     
+- lookup: ten_khoa
+  examples: |
+    - khoa điện tử
+    - khoa kỹ thuật điện tử 1
+    - khoa đt
+    - khoa ktđt 1
+    - khoa ktđt
+    - khoa dt
