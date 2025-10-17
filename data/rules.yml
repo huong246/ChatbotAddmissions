@@ -61,6 +61,7 @@ rules:
   - action: utter_hoi_chuc_nang_bot
 
 
+
 - rule: Liên hệ khoa phòng giáo vụ
   steps:
   - intent: lien_he_khoa_phong_giao_vu
@@ -80,10 +81,6 @@ rules:
   - action: action_tra_cuu_ma_nganh
 
 
-- rule: Tra cứu điểm chuẩn
-  steps:
-  - intent: tra_cuu_diem_chuan
-  - action: action_tra_cuu_diem_chuan
 
 - rule: Tra cứu khả năng trúng tuyển
   steps:
@@ -245,7 +242,54 @@ rules:
   - intent: hoi_danh_gia_chat_luong
   - action: utter_hoi_danh_gia_chat_luong
 
+- rule: Chuyển sang Gemini khi confidence thấp
+  steps:
+  - intent: nlu_fallback
+  - action: action_default_fallback
+
+- rule: Reset fallback count khi conversation bắt đầu
+  conversation_start: true
+  steps:
+  - action: action_reset_fallback_count
 
 
 
+- rule: Xử lý trả lời năm cho action_theo_nganh
+  condition:
+  - slot_was_set:
+    - awaiting_year: true
+  steps:
+  - intent: tra_cuu_diem_chuan_theo_nam
+    entities:
+    - nam
+  - action: action_tra_cuu_diem_chuan_theo_nganh
+
+- rule: Xử lý trả lời ngành cho action_theo_nam
+  condition:
+  - slot_was_set:
+    - awaiting_major: true
+  steps:
+  - intent: tra_cuu_diem_chuan_theo_nganh
+    entities:
+    - ten_nganh
+  - action: action_tra_cuu_diem_chuan_theo_nam
+
+- rule: Xử lý trả lời năm cho phương thức
+  condition:
+  - slot_was_set:
+    - awaiting_year_phuong_thuc: true
+  steps:
+  - intent: tra_cuu_diem_chuan_theo_nam
+    entities:
+    - nam
+  - action: action_tra_cuu_diem_chuan_theo_phuong_thuc
+
+- rule: Fallback đến Gemini
+  steps:
+  - intent: fallback_gemini
+  - action: action_fallback_gemini
+
+- rule: Gọi Gemini khi có từ khóa trong tin nhắn
+  steps:
+  - action: action_kiem_tra_keyword_gemini
 
