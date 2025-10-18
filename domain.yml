@@ -20,7 +20,10 @@ intents:
   - lien_he_khoa_phong_giao_vu
   - hoi_thong_tin_nganh
   - tra_cuu_ma_nganh
-  - tra_cuu_diem_chuan
+  - tra_cuu_diem_chuan_theo_nganh
+  - tra_cuu_diem_chuan_theo_nam
+  - tra_cuu_diem_chuan_theo_phuong_thuc
+  - tra_cuu_diem_chuan_tong_quan
   - tra_cuu_kha_nang_trung_tuyen
   - xet_tuyen_dieu_kien_dien_tu
   - xet_tuyen_uu_tien_dien_tu
@@ -51,6 +54,7 @@ intents:
   - hoi_so_luong_co_so
   - hoi_co_so_vat_chat
   - hoi_danh_gia_chat_luong
+  - nlu_fallback
 
 
 
@@ -107,12 +111,44 @@ slots:
     mappings:
       - type: from_text
 
+  awaiting_year:
+    type: bool
+    mappings:
+    - type: custom
+    influence_conversation: true
+    initial_value: false
+
+  awaiting_major:
+    type: bool
+    mappings:
+    - type: custom
+    influence_conversation: true
+    initial_value: false
+
+  awaiting_year_phuong_thuc:
+    type: bool
+    mappings:
+    - type: custom
+    influence_conversation: true
+    initial_value: false
+
+  fallback_count:
+    type: float
+    initial_value: 0
+    influence_conversation: true
+    min_value: 0
+    max_value: 3
+    mappings:
+      - type: custom
 
 
 actions:
   - action_hoi_thong_tin_nganh
   - action_tra_cuu_ma_nganh
-  - action_tra_cuu_diem_chuan
+  - action_tra_cuu_diem_chuan_theo_nganh
+  - action_tra_cuu_diem_chuan_theo_nam
+  - action_tra_cuu_diem_chuan_theo_phuong_thuc
+  - action_tra_cuu_diem_chuan_tong_quan
   - action_tra_cuu_kha_nang_trung_tuyen
   - action_xet_tuyen_dieu_kien_dien_tu
   - action_xet_tuyen_uu_tien_dien_tu
@@ -126,6 +162,10 @@ actions:
   - action_register
   - action_login
   - action_logout
+  - action_fallback_gemini
+  - action_default_fallback
+  - action_reset_fallback_count
+  - action_kiem_tra_keyword_gemini
 
 
 forms:
@@ -145,6 +185,32 @@ responses:
     - text: "Chào bạn, tôi là chatbot tư vấn tuyển sinh của Khoa Điện tử - Học viện Công nghệ Bưu chính Viễn thông (PTIT). Tôi có thể giúp gì cho bạn?"
     - text: "Xin chào! Bạn cần tư vấn thông tin gì về các ngành của Khoa Điện tử PTIT ạ?"
     - text: "Xin chào! Tôi là bot tư vấn tuyển sinh khoa Điện tử - Học viện Công nghệ Bưu chính Viễn thông. Rất vui được hỗ trợ bạn!"
+
+  utter_fallback:
+    - text: "Để tôi hỗ trợ bạn tốt hơn với câu hỏi này..."
+
+  utter_hoi_nam:
+    - text: "Bạn muốn tra cứu điểm chuẩn năm nào? PTIT có dữ liệu từ 2022-2025."
+    - text: "Bạn quan tâm đến điểm chuẩn năm nào? (2022, 2023, 2024, 2025)"
+    - text: "Năm nào bạn muốn tra cứu? Mình có điểm chuẩn các năm 2022, 2023, 2024, 2025."
+
+  utter_hoi_nam_bang_diem:
+    - text: "Bạn muốn xem bảng điểm chuẩn năm nào? Mình có dữ liệu từ 2022-2025."
+    - text: "Năm nào bạn muốn xem bảng điểm tổng quan? (2022-2025)"
+
+  utter_hoi_ten_nganh:
+    - text: "Bạn muốn tra cứu điểm chuẩn ngành nào trong khoa Điện tử?"
+    - text: "Khoa Điện tử có 3 ngành: Kỹ thuật Điều khiển và Tự động hóa, Công nghệ Kỹ thuật Điện, Điện tử, Công nghệ Vi mạch Bán dẫn. Bạn quan tâm ngành nào?"
+    - text: "Ngành nào bạn muốn hỏi điểm? Khoa Điện tử có các ngành: Điều khiển tự động, Điện điện tử, Vi mạch bán dẫn."
+
+  utter_hoi_nganh_hoac_khoa:
+    - text: "Bạn muốn tra cứu điểm chuẩn cho ngành nào hoặc khoa nào?"
+    - text: "Mình cần biết bạn quan tâm ngành cụ thể nào hoặc khoa nào để tra cứu điểm chuẩn."
+    - text: "Bạn có thể cho mình biết tên ngành hoặc khoa bạn muốn tra cứu điểm không?"
+
+  utter_hoi_loai_xet_tuyen:
+    - text: "Bạn muốn tra cứu điểm theo phương thức nào? (THPT, SAT, ACT, HSA, TSA, APT, tài năng, xét tuyển kết hợp, học bạ, thi đánh giá năng lực)"
+    - text: "PTIT có các phương thức xét tuyển: THPT, SAT, ACT, tài năng, học bạ... Bạn quan tâm phương thức nào?"
 
   utter_tam_biet:
     - text: "Tạm biệt bạn! Chúc bạn một ngày tốt lành!"
